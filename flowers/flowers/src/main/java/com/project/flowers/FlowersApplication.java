@@ -1,13 +1,13 @@
-package com.projet.e_commerce;
+package com.project.flowers;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ECommerceApplication {
+public class FlowersApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ECommerceApplication.class, args);
+		SpringApplication.run(FlowersApplication.class, args);
 	}
 
 }
