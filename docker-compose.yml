@@ -1,0 +1,30 @@
+services:
+  flowers:
+    build:
+      context: ./flowers/flowers  # Updated context
+      dockerfile: Dockerfile       # The Dockerfile is in the same directory
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/flowershop
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 
+    depends_on:
+      - db
+
+  flower:
+    build:
+      context: ./flower            # Assuming the flower Dockerfile is in flower/
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: flowershop
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 
+    ports:
+      - "3306:3306"
