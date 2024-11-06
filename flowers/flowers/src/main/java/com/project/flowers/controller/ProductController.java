@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,8 +51,6 @@ public class ProductController {
             if (!image.isEmpty()) {
                 String imageName = image.getOriginalFilename();
                 Path imagePath = Paths.get(IMAGE_DIRECTORY + imageName);
-                
-                // Ensure directory exists
                 Files.createDirectories(imagePath.getParent());
                 
                 Files.write(imagePath, image.getBytes());
@@ -78,7 +78,14 @@ public class ProductController {
         productService.deleteProduct(id);
         return ResponseEntity.ok("Product deleted successfully");
     }
-
-    // Helper method to add image URL
-   
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateFlower(@PathVariable Long id, @RequestBody Product product) {
+        Product updatedFlower = productService.updateProduct(id, product); 
+        if (updatedFlower != null) {
+            return ResponseEntity.ok(updatedFlower);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+    
 }

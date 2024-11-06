@@ -11,10 +11,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")  // Remplacez par vos endpoints
-                .allowedOrigins("http://localhost:4200")  // Origine de votre frontend Angular
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+        .allowedOrigins("http://localhost:4200")  // Origine de votre frontend Angular
+        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+        .allowedHeaders("*")
+        .allowCredentials(true)
+        .maxAge(3600);
     }
 
 }

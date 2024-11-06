@@ -34,7 +34,17 @@ public void deleteProduct(Long id)
 {
     productRepository.deleteById(id);
 }
- 
+public Product updateProduct(Long id, Product product) {
+   Optional<Product> existingProduct = productRepository.findById(id);
+   if (existingProduct.isPresent()) {
+       Product updatedProduct = existingProduct.get();
+       updatedProduct.setFlowerName(product.getFlowerName());
+       updatedProduct.setPrice(product.getPrice());
+       updatedProduct.setImage(product.getImage());
+       return productRepository.save(updatedProduct);
+   }
+   return null;
+}
 
 
 }
